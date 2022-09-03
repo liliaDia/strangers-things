@@ -17,7 +17,7 @@ const Register=({token, setToken, username, setUsername, password, setPassword})
     const onSubmit=(event)=>{
         event.preventDefault()
         register();
-        Navigate('/Profile')
+        Navigate('/Profile',{state:{token}})
     }
 
 

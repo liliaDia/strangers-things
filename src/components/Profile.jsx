@@ -6,13 +6,14 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const Profile= ({token})=>{
-    const [user,setUser]=useState({})
+    const [user,setUser]=useState(null)
     const {state}= useLocation();
     const auth = state.token
 
+    
+
  async function getInfo(){
     const userObj = await userProfile((auth))
-    console.log (userObj)
     setUser(userObj)
     }
 
@@ -20,14 +21,17 @@ const Profile= ({token})=>{
         getInfo()
     },[])
 
-    const posts = user.posts
-    const messages= user.messages
-    const id= user._id
-    const name= user.username
-    
+    if (user===null){return}
+
+const msg= user.data.messages
+console.log(msg)
+   
     return(
         <div>
             <h1>profile</h1>
+            <h3>messages</h3>
+          
+           
         </div>
     )
 }

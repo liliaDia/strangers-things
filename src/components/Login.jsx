@@ -15,8 +15,8 @@ const Login = ({
 
   const register = async () => {
     const data = await login("art", "karen");
-    //console.log(data);
     setToken(data);
+    console.log(data)
   };
 
   useEffect(() => {
@@ -38,18 +38,20 @@ const Login = ({
           id="username"
           placeholder="username"
           type="text"
-          onSubmit={(event) => {
+          onChange={(event) => {
             setUsername(event.target.value);
           }}
+          value={username}
         ></input>
         password:
         <input
           id="password"
           placeholder="password"
           type="password"
-          onSubmit={(event) => {
+          onChange={(event) => {
             setPassword(event.target.value);
           }}
+          value={password}
         ></input>
         <button type="submit ">SUBMIT</button>
       </form>

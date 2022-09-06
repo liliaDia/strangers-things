@@ -1,7 +1,6 @@
-import { userProfile } from "../Api";
-import { login } from "../Api";
 
-import { Navigate, useNavigate } from "react-router-dom";
+import { login } from "../Api";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 const Login = ({
   token,
@@ -14,20 +13,19 @@ const Login = ({
  const Navigate = useNavigate();
 
   const register = async () => {
-    const data = await login("art", "karen");
+    
+    const data = await login(username,password);
+    console.log(data);
     setToken(data);
-    console.log(data)
   };
 
-  useEffect(() => {
-    register();
-  }, []);
-
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    register();
-    Navigate('/Profile',{state:{token}})
+    await register();
+    console.log(token)
+    Navigate('/Profile',{state:token})
   };
+  
 
   return (
     <div>
@@ -53,7 +51,7 @@ const Login = ({
           }}
           value={password}
         ></input>
-        <button type="submit ">SUBMIT</button>
+        <button type="submit">SUBMIT</button>
       </form>
     </div>
   );

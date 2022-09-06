@@ -1,6 +1,5 @@
 import { registerUser } from "../Api";
-import { userProfile } from "../Api";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register=({token, setToken, username, setUsername, password, setPassword})=>{
     

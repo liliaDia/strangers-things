@@ -34,7 +34,7 @@ async function userProfile(token) {
   try {
     const result = await fetch(baseUrl + "/users/me", options);
     const data = await result.json();
-    return data
+    return data.data;
   } catch (err) {
     console.error(err);
   }
@@ -57,6 +57,7 @@ async function login(username, password) {
     const result = await fetch(baseUrl+"/users/login", options);
     const data= await result.json();
     const token = data.data.token;
+
     return token;
   }
   catch(err){console.error(err)}
@@ -87,4 +88,41 @@ async function newPost(token,title,description,price,location="on request",deliv
   catch(err){console.error(err)}
   }
 
-export { registerUser, userProfile, login, newPost };
+async function deletePost(token,id){
+  const options= {
+    method: "DELETE",
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  }
+}
+try{
+  const result= await fetch(baseUrl+`/posts/${id}`,options)
+  const data= await result.json();
+  console.log(data)
+  return data
+}catch(err){console.error(err)}
+}
+
+async function sendMessage(token,content,postId){
+  const options={
+    method: "POST",
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  body: JSON.stringify({
+   message: {
+      content:content
+    }
+  })
+ }
+
+ try{
+  const result= await fetch(baseUrl+`/posts/${postId}/messages`,options)
+  const data= await result.json();
+  const message= data
+  console.log(message)
+ }catch(err){console.error(err)}
+}
+export { registerUser, userProfile, login, newPost, deletePost,sendMessage };

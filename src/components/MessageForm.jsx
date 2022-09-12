@@ -10,9 +10,11 @@ const MessageForm = ({ token }) => {
   const [sent, setsent] = useState(false);
 
   const onSubmit = async (event) => {
+    try{
     event.preventDefault();
     await sendMessage(token, content, postId);
     setsent(true);
+    }catch(err){console.error(err)}
   };
 
   return (

@@ -7,9 +7,10 @@ const Profile = ({ token }) => {
   const Navigate = useNavigate();
 
   async function getInfo() {
+    try{
     const userObj = await userProfile(token);
     setUser(userObj);
-  }
+  }catch(err){console.error(err)}}
 
   useEffect(() => {
     getInfo();

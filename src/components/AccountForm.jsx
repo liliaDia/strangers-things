@@ -10,11 +10,12 @@ const AccountForm = ({ setToken }) => {
   const [password, setPassword] = useState("");
 
   const onSubmit = async (event) => {
-    event.preventDefault();
-    const fr = action === "login" ? login : registerUser;
-    const data = await fr(username, password);
+    try{event.preventDefault();
+    const loginOrRegister = action === "login" ? login : registerUser;
+    const data = await loginOrRegister(username, password);
     setToken(data);
     Navigate("/Profile");
+    }catch(err){console.error(err)}
   };
 
   return (

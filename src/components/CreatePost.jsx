@@ -14,7 +14,7 @@ const CreatePosts = ({ token }) => {
   const navigate = useNavigate();
 
  const newPostInfo = async () => {
-    const data = await newPost(
+    try{const data = await newPost(
       token,
       title,
       description,
@@ -23,9 +23,10 @@ const CreatePosts = ({ token }) => {
       delivery
     );
     return data;
+    }catch(err){console.error(err)}
     }
 const editPostInfo = async () => {
-      const data = await editPost(
+      try{const data = await editPost(
         token,
         postId,
         {title,
@@ -35,7 +36,7 @@ const editPostInfo = async () => {
         delivery}
       );
       return data;
-      }
+      }catch(err){console.error(err)}}
 
   const onSubmit = (event) => {
     event.preventDefault();

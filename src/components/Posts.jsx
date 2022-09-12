@@ -8,10 +8,11 @@ const Posts = ({ token }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const getPosts = async () => {
+   try{
     const result = await fetchPosts(token);
     setPosts(result);
-  };
-
+  }catch(err){console.error(err)}
+  }
   useEffect(() => {
     getPosts();
   }, []);
